@@ -1,0 +1,75 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
+    <ActionBar title="{{ pageTitle }}" class="bg-blue-500 text-white">
+        <NavigationButton text="Back" android.systemIcon="ic_menu_back" />
+    </ActionBar>
+    
+    <ScrollView>
+        <GridLayout rows="auto, *">
+            <!-- Content Form -->
+            <StackLayout row="1" class="bg-gray-100 p-4">
+                <!-- Content Input Section -->
+                <StackLayout visibility="{{ !showDatePicker ? 'visible' : 'collapsed' }}">
+                    <!-- Title Input -->
+                    <Label text="Title" class="text-lg font-bold text-gray-800 mb-2" />
+                    <TextField text="{{ title }}" 
+                              hint="{{ titleHint }}"
+                              class="bg-white p-4 rounded-lg mb-4 text-base shadow-sm" />
+                    
+                    <!-- Message Input -->
+                    <Label text="{{ messageLabel }}" class="text-lg font-bold text-gray-800 mb-2" />
+                    <TextView text="{{ message }}" 
+                             hint="{{ messageHint }}"
+                             class="bg-white p-4 rounded-lg h-32 text-base shadow-sm" 
+                             textWrap="true" />
+                    
+                    <!-- Media Section -->
+                    <StackLayout class="mt-4">
+                        <Button text="Select Photo" 
+                                tap="{{ addMedia }}" 
+                                class="bg-blue-500 text-white rounded-full p-4 shadow-md" />
+                        
+                        <!-- Preview Image -->
+                        <GridLayout rows="auto" columns="*, auto" 
+                                  visibility="{{ mediaPath ? 'visible' : 'collapsed' }}"
+                                  class="mt-4">
+                            <Image col="0" src="{{ mediaPath }}" 
+                                   height="200" 
+                                   stretch="aspectFill"
+                                   class="rounded-lg" />
+                            <Button col="1" text="✕" 
+                                    tap="{{ removeMedia }}"
+                                    class="bg-red-500 text-white rounded-full w-10 h-10 m-2" />
+                        </GridLayout>
+                    </StackLayout>
+                    
+                    <!-- Continue Button -->
+                    <Button text="Continue" 
+                            tap="{{ showDateTimePicker }}" 
+                            isEnabled="{{ canContinue }}"
+                            class="bg-blue-600 text-white font-semibold rounded-full p-4 mt-6 shadow-lg" />
+                </StackLayout>
+
+                <!-- Date Time Picker Section -->
+                <StackLayout visibility="{{ showDatePicker ? 'visible' : 'collapsed' }}" class="mt-4">
+                    <Label text="When should this memory unlock?" class="text-lg font-bold text-gray-800 mb-4" />
+                    
+                    <DatePicker date="{{ unlockDate }}" 
+                               class="bg-white p-4 rounded-lg mb-4" />
+                    
+                    <TimePicker time="{{ unlockTime }}" 
+                               class="bg-white p-4 rounded-lg mb-4" />
+                    
+                    <!-- Save Button -->
+                    <Button text="Save Memory" 
+                            tap="{{ saveSpecialCapsule }}" 
+                            class="bg-blue-600 text-white font-semibold rounded-full p-4 mt-6 shadow-lg" />
+                    
+                    <!-- Back Button -->
+                    <Button text="Back to Content" 
+                            tap="{{ hideDateTimePicker }}" 
+                            class="bg-gray-200 text-gray-700 rounded-full p-4 mt-2" />
+                </StackLayout>
+            </StackLayout>
+        </GridLayout>
+    </ScrollView>
+</Page>

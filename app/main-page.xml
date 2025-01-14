@@ -1,0 +1,103 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo">
+    <ActionBar title="Time Capsule" class="bg-blue-500 text-white" flat="true" />
+    
+    <GridLayout>
+        <!-- Main List -->
+        <ListView items="{{ capsules }}" class="content bg-gray-100">
+            <ListView.itemTemplate>
+                <GridLayout rows="auto" columns="*" class="bg-white m-2 rounded-lg shadow-md">
+                    <StackLayout class="p-4">
+                        <!-- Header with Unblock Time and Share Button -->
+                        <GridLayout columns="*, auto" class="mb-2">
+                            <Label col="0" text="{{ 'Unblocking time: ' + unlockTime }}" 
+                                   class="text-sm text-gray-500" />
+                            <Button col="1" 
+                                    text="Share" 
+                                    class="bg-blue-100 text-blue-600 font-medium rounded-full px-4 py-1 shadow-sm" 
+                                    tap="{{ $parents['ListView'].onShareTap }}" />
+                        </GridLayout>
+                        
+                        <!-- Image content -->
+                        <Image src="{{ imagePath }}" height="200" stretch="aspectFill" 
+                               class="rounded-lg" visibility="{{ imagePath ? 'visible' : 'collapsed' }}" />
+                        
+                        <!-- Title -->
+                        <Label text="{{ title }}" 
+                               class="text-lg font-bold text-gray-900 mb-1"
+                               visibility="{{ title ? 'visible' : 'collapsed' }}" />
+                               
+                        <!-- Text content -->
+                        <Label text="{{ content }}" textWrap="true"
+                               class="text-base text-gray-700" />
+                    </StackLayout>
+                </GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
+
+        <!-- Create Button -->
+        <Button text="+" tap="{{ showOptions }}" 
+                class="fab-button bg-blue-600 text-white text-2xl font-bold shadow-lg" />
+
+        <!-- Create Capsule Modal -->
+        <AbsoluteLayout visibility="{{ isModalVisible ? 'visible' : 'collapsed' }}" 
+                        class="modal-backdrop">
+            <StackLayout class="modal-fullscreen p-6">
+                <Label text="Create Time Capsule" class="text-2xl font-bold text-center text-blue-600 mb-6" />
+                
+                <GridLayout rows="auto" columns="*, *" class="mb-4">
+                    <!-- Text Capsule -->
+                    <StackLayout row="0" col="0" tap="{{ navigateToTextInput }}" class="capsule-option">
+                        <Label text="📝" class="text-4xl text-center" />
+                        <Label text="Text" class="text-center font-semibold mt-2" />
+                    </StackLayout>
+                    
+                    <!-- Special Capsule -->
+                    <StackLayout row="0" col="1" tap="{{ showSpecialOptions }}" class="capsule-option">
+                        <Label text="✨" class="text-4xl text-center" />
+                        <Label text="Special" class="text-center font-semibold mt-2" />
+                    </StackLayout>
+                </GridLayout>
+
+                <Button text="Cancel" tap="{{ hideModal }}" 
+                        class="bg-gray-200 text-gray-700 rounded-full p-4 mt-4" />
+            </StackLayout>
+        </AbsoluteLayout>
+
+        <!-- Special Options Modal -->
+        <AbsoluteLayout visibility="{{ isSpecialModalVisible ? 'visible' : 'collapsed' }}" 
+                        class="modal-backdrop">
+            <StackLayout class="modal-fullscreen p-6">
+                <Label text="Special Capsule" class="text-2xl font-bold text-center text-blue-600 mb-6" />
+                
+                <GridLayout rows="auto, auto" columns="*, *" class="mb-4">
+                    <!-- Anniversary -->
+                    <StackLayout row="0" col="0" tap="{{ navigateToSpecialInput }}" class="capsule-option">
+                        <Label text="💑" class="text-4xl text-center" />
+                        <Label text="Anniversary" class="text-center font-semibold mt-2" />
+                    </StackLayout>
+                    
+                    <!-- Birthday -->
+                    <StackLayout row="0" col="1" tap="{{ navigateToSpecialInput }}" class="capsule-option">
+                        <Label text="🎂" class="text-4xl text-center" />
+                        <Label text="Birthday" class="text-center font-semibold mt-2" />
+                    </StackLayout>
+                    
+                    <!-- Future Message -->
+                    <StackLayout row="1" col="0" tap="{{ navigateToSpecialInput }}" class="capsule-option">
+                        <Label text="📮" class="text-4xl text-center" />
+                        <Label text="Future Self" class="text-center font-semibold mt-2" />
+                    </StackLayout>
+                    
+                    <!-- Text and Image -->
+                    <StackLayout row="1" col="1" tap="{{ navigateToSpecialInput }}" class="capsule-option">
+                        <Label text="📝🖼️" class="text-4xl text-center" />
+                        <Label text="Text and Image" class="text-center font-semibold mt-2" />
+                    </StackLayout>
+                </GridLayout>
+
+                <Button text="Back" tap="{{ hideSpecialModal }}" 
+                        class="bg-gray-200 text-gray-700 rounded-full p-4 mt-4" />
+            </StackLayout>
+        </AbsoluteLayout>
+    </GridLayout>
+</Page>

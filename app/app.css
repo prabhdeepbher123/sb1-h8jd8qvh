@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.fab-button {
+    width: 60;
+    height: 60;
+    border-radius: 30;
+    margin: 15;
+    horizontal-align: right;
+    vertical-align: bottom;
+}
+
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+}
+
+.modal-fullscreen {
+    width: 100%;
+    vertical-align: bottom;
+    background-color: white;
+    border-top-left-radius: 20;
+    border-top-right-radius: 20;
+}
+
+.capsule-option {
+    background-color: #f8fafc;
+    border-radius: 16;
+    padding: 16;
+    margin: 8;
+    elevation: 2;
+}
+
+ActionBar {
+    background-color: #3b82f6;
+    color: white;
+}

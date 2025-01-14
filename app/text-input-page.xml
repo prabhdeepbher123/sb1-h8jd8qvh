@@ -1,0 +1,52 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
+    <ActionBar title="New Memory" class="bg-blue-500 text-white">
+        <NavigationButton text="Back" android.systemIcon="ic_menu_back" />
+    </ActionBar>
+    
+    <ScrollView>
+        <StackLayout class="bg-gray-100 p-4">
+            <!-- Content Input Section -->
+            <StackLayout visibility="{{ !showDatePicker ? 'visible' : 'collapsed' }}">
+                <!-- Title Input -->
+                <Label text="Title" class="text-lg font-bold text-gray-800 mb-2" />
+                <TextField text="{{ title }}" 
+                          hint="Enter a title for your memory..." 
+                          class="bg-white p-4 rounded-lg mb-4 text-base shadow-sm" />
+                
+                <!-- Content Input -->
+                <Label text="Your Memory" class="text-lg font-bold text-gray-800 mb-2" />
+                <TextView text="{{ textContent }}" 
+                         hint="Write your thoughts here..." 
+                         class="bg-white p-4 rounded-lg h-64 text-base shadow-sm" 
+                         textWrap="true" />
+                
+                <!-- Continue Button -->
+                <Button text="Continue" 
+                        tap="{{ showDateTimePicker }}" 
+                        isEnabled="{{ canContinue }}"
+                        class="bg-blue-600 text-white font-semibold rounded-full p-4 mt-6 shadow-lg" />
+            </StackLayout>
+
+            <!-- Date Time Picker Section -->
+            <StackLayout visibility="{{ showDatePicker ? 'visible' : 'collapsed' }}" class="mt-4">
+                <Label text="When should this memory unlock?" class="text-lg font-bold text-gray-800 mb-4" />
+                
+                <DatePicker date="{{ unlockDate }}" 
+                           class="bg-white p-4 rounded-lg mb-4" />
+                
+                <TimePicker time="{{ unlockTime }}" 
+                           class="bg-white p-4 rounded-lg mb-4" />
+                
+                <!-- Save Button -->
+                <Button text="Save Memory" 
+                        tap="{{ saveTextCapsule }}" 
+                        class="bg-blue-600 text-white font-semibold rounded-full p-4 mt-6 shadow-lg" />
+                
+                <!-- Back Button -->
+                <Button text="Back to Content" 
+                        tap="{{ hideDateTimePicker }}" 
+                        class="bg-gray-200 text-gray-700 rounded-full p-4 mt-2" />
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</Page>
